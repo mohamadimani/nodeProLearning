@@ -23,9 +23,9 @@ module.exports = class Application {
         app.use(expressLayouts);
         app.set('view engine', 'ejs')
         app.set('views', path.join(__dirname, 'resource/views'));
-        app.set('layout' , 'master')
+        app.set('layout' , 'main')
         app.set('layout extractScripts' , true)
-        app.set('layout extractstyles' , true)
+        app.set('layout extractStyles' , true)
     }
 
     setRoutes() {
