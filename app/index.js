@@ -2,6 +2,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
 const app = express();
 
 
@@ -14,9 +15,9 @@ module.exports = class Application {
     }
 
     configServer() {
-        app.listen(3000, (err) => {
+        app.listen(3333, (err) => {
             if (err) console.log(err);
-            console.log('server is runing on port 3000 ... ')
+            console.log('server is runing on port 3333 ... ')
         })
     }
 
@@ -28,21 +29,17 @@ module.exports = class Application {
         app.set('layout', 'main')
         app.set('layout extractScripts', true)
         app.set('layout extractStyles', true)
+        app.use(bodyParser.json())
+        app.use(bodyParser.urlencoded({ extended: true }))
     }
 
     setRoutes() {
-        app.get('/', (req, res) => {
-            res.render('index')
-        })
+        app.use(require('./routes'))
     }
 
     async configeDatabase() {
         // global.promise = mongoose.promise
-        await mongoose.connect('mongodb://localhost/nodeproject' , {
-            useNewUrlParser : true,
-            useUnifiedTopology : true,
-            usefindAndModify : false,
-            useCreateIndex : true
-        })
+        await mongoose.connect('mongodb://localhost:27017/nodeproject', {
+        }).then(() => console.log('Mongo DB Connected!'))
     }
 }
