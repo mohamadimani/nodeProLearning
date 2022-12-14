@@ -1,16 +1,10 @@
 const express = require('express');
 const router = express.Router();
-router.get('/register', (req, res) => {
-    res.render('home/auth/register')
-})
+const registerController = require('./../../http/controller/auth/registerController')
 
-router.post('/register', (req, res) => {
-    res.json(req.body)
-})
-
-router.get('/login', (req, res) => {
-    res.render('home/auth/login')
-})
+router.get('/register', registerController.showForm)
+router.post('/register', registerController.registerProccess)
+router.get('/login', registerController.loginForm)
 
 
 module.exports = router;

@@ -3,6 +3,9 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
+const session = require('express-session')
+const connectMongo = require('connect-mongo')
+const cookieParser = require('cookie-parser')
 const app = express();
 
 
@@ -15,9 +18,9 @@ module.exports = class Application {
     }
 
     configServer() {
-        app.listen(3333, (err) => {
+        app.listen(3000, (err) => {
             if (err) console.log(err);
-            console.log('server is runing on port 3333 ... ')
+            console.log('server is runing on port 3000 ... ')
         })
     }
 
@@ -30,7 +33,15 @@ module.exports = class Application {
         app.set('layout extractScripts', true)
         app.set('layout extractStyles', true)
         app.use(bodyParser.json())
-        app.use(bodyParser.urlencoded({ extended: true }))
+        app.use(bodyParser.urlencoded({ extended: true }));
+        app.use(session({
+            secret: 'secretKey',
+            resave: true,
+            saveUninitialized: true,
+            store: connectMongo.create({ mongoUrl: 'mongodb://localhost:27017/nodeproject' }),
+            cookie: { secure: false }
+        }))
+        app.use(cookieParser());
     }
 
     setRoutes() {
