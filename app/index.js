@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session')
 const connectMongo = require('connect-mongo')
 const cookieParser = require('cookie-parser')
+const flash = require('connect-flash')
 const app = express();
 
 
@@ -42,6 +43,7 @@ module.exports = class Application {
             cookie: { secure: false }
         }))
         app.use(cookieParser());
+        app.use(flash());
     }
 
     setRoutes() {
