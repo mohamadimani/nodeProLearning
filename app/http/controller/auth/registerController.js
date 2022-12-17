@@ -1,7 +1,7 @@
 const user = require('./../../../models/users')
 const { validationResult } = require('express-validator');
-const autoBind = require('auto-bind');
-const recaptcha = require('express-recaptcha').RecaptchaV2;
+const {autoBind} = require('auto-bind2');
+const Recaptcha = require('express-recaptcha').RecaptchaV2;
 const { request } = require('http');
 class registerController {
 
@@ -11,7 +11,7 @@ class registerController {
     }
 
     setRecaptcha() {
-        this.recaptcha = new recaptcha('6LfHHHwjAAAAAPmcqHkDlI8jtmz0uORw_zC2qLDG', '6LfHHHwjAAAAAPHUHpGNeqjooE4zyMEtUgtdusow', {
+        this.recaptcha = new Recaptcha('6LfHHHwjAAAAAPmcqHkDlI8jtmz0uORw_zC2qLDG', '6LfHHHwjAAAAAPHUHpGNeqjooE4zyMEtUgtdusow', {
             'hl': 'fa'
         })
     }

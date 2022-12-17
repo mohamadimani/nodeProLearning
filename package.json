@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "auto-bind": "^5.0.1",
+    "auto-bind2": "^1.0.3",
     "body-parser": "^1.20.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
