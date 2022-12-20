@@ -2,16 +2,17 @@ const user = require('./../../../models/users')
 const { validationResult } = require('express-validator');
 const controller = require('./../controller')
 const { request } = require('http');
+const passport = require('passport');
 
 class registerController extends controller {
-   
+
     showForm(req, res) {
         res.render('home/auth/register', { messages: req.flash('errors'), recaptcha: this.recaptcha.render() })
     }
 
-    async registerProccess(req, res) {
+    async registerProccess(req, res, next) {
 
-        this.validationRecaptcha(req, res)
+        this.validationRecaptcha(req, res, next)
             .then(result => validationResult(req))
             .then(result => {
                 if (!result.isEmpty()) {
@@ -20,32 +21,18 @@ class registerController extends controller {
                     errors.forEach(error => messages.push(error.msg));
                     req.flash('errors', messages)
                     res.redirect('/auth/register')
+                } else {
+                    this.register(req, res, next)
                 }
             })
+    }
 
-        // this.recaptcha.verify(req, (err) => {
-        //     if (err) {
-        //         req.flash('errors', 'google captcha required!');
-        //         res.redirect('/auth/register')
-        //     } else {
-        //         const result = validationResult(req);
-        //         if (!result.isEmpty()) {
-        //             const errors = result.array()
-        //             const messages = []
-        //             errors.forEach(error => messages.push(error.msg));
-        //             req.flash('errors', messages)
-        //             res.redirect('/auth/register')
-        //         } else {
-        //             const addUser = new user({
-        //                 name: req.body.name,
-        //                 email: req.body.email,
-        //                 password: req.body.password,
-        //             })
-        //             addUser.save();
-        //             res.redirect('/')
-        //         }
-        //     }
-        // })
+    register(req, res, next) {
+        passport.authenticate('local.register', {
+            successRedirect: '/',
+            failureRedirect: '/auth/register',
+            failureFlash: true
+        })(req, res, next)
     }
 
     loginForm(req, res) {

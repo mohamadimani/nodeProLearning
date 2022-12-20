@@ -7,6 +7,8 @@ const session = require('express-session')
 const connectMongo = require('connect-mongo')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
+const passportLocal = require('passport-local')
+const passport = require('passport')
 const app = express();
 
 
@@ -26,6 +28,7 @@ module.exports = class Application {
     }
 
     setConfig() {
+        require('./passport/passport-local')
         app.use(express.static(__dirname + '/public'))
         app.use(expressLayouts);
         app.set('view engine', 'ejs')
@@ -44,6 +47,9 @@ module.exports = class Application {
         }))
         app.use(cookieParser());
         app.use(flash());
+        app.use(passport.initialize());
+        app.use(passport.session());
+        mongoose.set('strictQuery', true)
     }
 
     setRoutes() {
