@@ -1,6 +1,6 @@
-const user = require('./../../../models/users')
-const { validationResult } = require('express-validator');
-const controller = require('./../controller')
+const user = require('app/models/users')
+
+const controller = require('app/http/controller/controller')
 const { request } = require('http');
 const passport = require('passport');
 
@@ -12,19 +12,14 @@ class registerController extends controller {
 
     async registerProccess(req, res, next) {
 
-        this.validationRecaptcha(req, res, next)
-            .then(result => validationResult(req))
-            .then(result => {
-                if (!result.isEmpty()) {
-                    const errors = result.array()
-                    const messages = []
-                    errors.forEach(error => messages.push(error.msg));
-                    req.flash('errors', messages)
-                    res.redirect('/auth/register')
-                } else {
-                    this.register(req, res, next)
-                }
-            })
+        await this.validationRecaptcha(req, res, next)
+        const result = await this.validationForm(req, res)
+        if (result) {
+            this.register(req, res, next)
+        }
+        //else {
+        //     res.redirect('/auth/register');
+        // }
     }
 
     register(req, res, next) {

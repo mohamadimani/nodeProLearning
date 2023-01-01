@@ -20,7 +20,6 @@ passport.use('local.register', new localStrategy({
             if (error) return done(error, false, req.flash('errors', 'cant regester now! please try again'))
             done(null, addUser)
         });
-        res.redirect('/')
 
     })
 }));
