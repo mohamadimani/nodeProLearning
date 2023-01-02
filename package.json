@@ -12,6 +12,7 @@
     "app-module-path": "^2.2.0",
     "auto-bind": "^5.0.1",
     "auto-bind2": "^1.0.3",
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",

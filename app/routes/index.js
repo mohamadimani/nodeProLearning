@@ -3,11 +3,11 @@ const router = express.Router()
 
  
 const homeRoutes = require('./home')
-const registerRoutes = require('./auth/register')
+const authRoutes = require('./auth')
 
 
 
 router.use('/', homeRoutes)
-router.use('/auth', registerRoutes)
+router.use('/auth', authRoutes)
 
 module.exports = router

@@ -33,3 +33,16 @@ passport.deserializeUser(function (id, done) {
         done(error, user)
     })
 })
+
+passport.use('local.login', new localStrategy({
+    usernameField: 'email',
+    passportField: 'password',
+    passReqToCallback: true
+}, (req, email, password, done) => {
+    user.findOne({ 'email': email }, (error, userParam) => {
+        if (error) return done(error);
+        if (!userParam) return done(null, false, req.flash('errors', 'this user not register yet!'))
+        if (!userParam.comparePassword(password)) return done(null, false, req.flash('errors', 'this password is not correct!'))
+        done(null, userParam)
+    })
+}));

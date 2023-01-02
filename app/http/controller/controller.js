@@ -21,7 +21,7 @@ module.exports = class controller {
             this.recaptcha.verify(req, (err) => {
                 if (err) {
                     req.flash('errors', 'google captcha required!');
-                    res.redirect('/auth/register')
+                    this.back(req, res);
                 } else {
                     resolve(true)
                 }
@@ -36,11 +36,15 @@ module.exports = class controller {
             const messages = []
             errors.forEach(error => messages.push(error.msg));
             req.flash('errors', messages)
-            res.redirect('/auth/register');
+            this.back(req, res);
             return false;
         } else {
             return true;
         }
+    }
+
+    back(req, res) {
+        return res.redirect(req.header('Referer') || '/')
     }
 
 }

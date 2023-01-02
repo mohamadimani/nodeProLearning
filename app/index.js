@@ -21,9 +21,9 @@ module.exports = class Application {
     }
 
     configServer() {
-        app.listen(3300, (err) => {
+        app.listen(3333, (err) => {
             if (err) console.log(err);
-            console.log('server is runing on port 3300 ... ')
+            console.log('server is runing on port 3333 ... ')
         })
     }
 

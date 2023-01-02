@@ -29,10 +29,6 @@ class registerController extends controller {
             failureFlash: true
         })(req, res, next)
     }
-
-    loginForm(req, res) {
-        res.render('home/auth/login')
-    }
 }
 
 module.exports = new registerController;
