@@ -8,7 +8,7 @@ const connectMongo = require('connect-mongo');
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const passportLocal = require('passport-local')
-const passport = require('passport'); 
+const passport = require('passport');
 const rememberLogin = require('./http/middleware/rememberLogin');
 const app = express();
 
@@ -46,6 +46,15 @@ module.exports = class Application {
         app.use(passport.session());
         mongoose.set('strictQuery', true)
         app.use(rememberLogin.handle)
+        app.use((req, res, next) => {
+            app.locals = {
+                auth: {
+                    check: req.isAuthenticated(),
+                    user: req.user
+                }
+            }
+            next()
+        })
     }
 
     setRoutes() {

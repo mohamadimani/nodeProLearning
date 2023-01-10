@@ -3,7 +3,7 @@
     <div class="col-8">
       <div class="card card-default">
         <div class="card-header">
-          <h5>ورود به سایت</h5>
+          <h5>LOGIN</h5>
         </div>
         <div class="card-body">
           <form class="form-horizontal" method="POST" action="/auth/login" novalidate>
@@ -20,17 +20,18 @@
             <% } %>
 
             <div class="form-group">
-              <label for="email" class="control-label">آدرس ایمیل</label>
+              <label for="email" class="control-label">Email</label>
               <input id="email" type="email" class="form-control" name="email" required>
             </div>
 
             <div class="form-group">
-              <label for="password" class="control-label">پسورد</label>
+              <label for="password" class="control-label">Password</label>
               <input id="password" type="password" class="form-control" name="password" required>
             </div>
 
             <div class="form-group">
-              <input id="remember" type="checkbox" class="checkbox" name="remember"> یادآوری ورود
+              <input id="remember" type="checkbox" class="checkbox" name="remember">
+              <label for="remember">Remember me</label>
             </div>
 
             <div class="form-group">
@@ -38,9 +39,9 @@
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">ورود</button>
-              <a href="/auth/google" class="btn btn-danger">ورود با اکانت گوگل</a>
-              <a href="/auth/password/reset" class="btn btn-link">فراموشی رمز عبور؟</a>
+              <button type="submit" class="btn btn-primary">Login</button>
+              <a href="/auth/google" class="btn btn-danger">Login with google acount</a>
+              <a href="/auth/password/reset" class="btn btn-link">Forget password</a>
             </div>
           </form>
         </div>

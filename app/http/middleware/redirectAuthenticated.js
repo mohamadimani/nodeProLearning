@@ -1,7 +1,7 @@
 class redirectAuthenticated {
 
     handle(req, res, next) {
-        if (req?.isAuthenticated()) res.redirect('/')
+        if (req.isAuthenticated()) res.redirect('/')
         next()
     }
 }

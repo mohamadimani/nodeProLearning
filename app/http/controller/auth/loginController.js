@@ -23,17 +23,20 @@ class loginController extends controller {
             if (!user) return res.redirect('/auth/login');
             req.login(user, error => {
                 if (error) console.log(error)
-                if(req.body.remember){
+                if (req.body.remember) {
                     user.setRememberToken(res)
                 }
                 return res.redirect('/')
             })
         })(req, res, next)
-
     }
 
-
-
+    logout(req, res, next) {
+        req.logout((req, res, next) => {
+        });
+        res.clearCookie('remember_token');
+        redirect('/')
+    }
 }
 
 module.exports = new loginController;

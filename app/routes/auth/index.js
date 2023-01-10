@@ -14,5 +14,6 @@ router.post('/register', registerValidator.handle(), registerController.register
 router.get('/login', loginController.showForm);
 router.post('/login', loginValidator.handle(), loginController.loginProccess);
 
+router.get('/logout', loginController.logout);
 
 module.exports = router;
