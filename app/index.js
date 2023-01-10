@@ -8,7 +8,8 @@ const connectMongo = require('connect-mongo');
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const passportLocal = require('passport-local')
-const passport = require('passport');
+const passport = require('passport'); 
+const rememberLogin = require('./http/middleware/rememberLogin');
 const app = express();
 
 
@@ -39,11 +40,12 @@ module.exports = class Application {
         app.use(bodyParser.json())
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(session({ ...config.session }))
-        app.use(cookieParser());
+        app.use(cookieParser('secretID'));
         app.use(flash());
         app.use(passport.initialize());
         app.use(passport.session());
         mongoose.set('strictQuery', true)
+        app.use(rememberLogin.handle)
     }
 
     setRoutes() {

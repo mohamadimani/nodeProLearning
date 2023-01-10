@@ -23,6 +23,9 @@ class loginController extends controller {
             if (!user) return res.redirect('/auth/login');
             req.login(user, error => {
                 if (error) console.log(error)
+                if(req.body.remember){
+                    user.setRememberToken(res)
+                }
                 return res.redirect('/')
             })
         })(req, res, next)

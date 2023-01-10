@@ -4,7 +4,7 @@ class registerValidator {
     handle() {
         return [
             check('name')
-                .isLength({ min: 5 })
+                .isLength({ min: 4 })
                 .withMessage('insert your currect name!'),
 
             check('email')
@@ -12,7 +12,7 @@ class registerValidator {
                 .withMessage('insert your currect email!'),
 
             check('password')
-                .isLength({ min: 5 })
+                .isLength({ min: 4 })
                 .withMessage('insert your currect password!'),
         ]
 
