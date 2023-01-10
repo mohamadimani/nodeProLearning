@@ -16,4 +16,8 @@ router.post('/login', loginValidator.handle(), loginController.loginProccess);
 
 router.get('/logout', loginController.logout);
 
+// router.get('/google', loginController.googleLogin);
+// router.get('/google/callback', loginController.googleCallback);
+
+
 module.exports = router;
